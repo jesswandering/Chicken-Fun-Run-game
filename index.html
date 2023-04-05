@@ -6,12 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Chicken Fun Run</title>
-    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap");
+    </style>
 </head>
 
 <body>
-    <script src="app.js"></script>
+    <h1>Chicken Fun Run</h1>
+    <h3>Why did the Chicken cross the Road?</h3>
+    <div class="imageContainer">
+        <img src="./img/chicken.png" alt="chicken" id="character" style="display: none;">
+        <img src="./img/fastcar.png" alt="fast" id="fast-car" style="display: none;">
+        <img src="./img/slowcar.png" alt="slow" id="slow-car" style="display: none;">
+    </div>
+    <main>
+        <canvas id="game" width="200" height="200"></canvas>
+    </main>
+    <aside id="center-bottom">
+        <h3 id="directions">Directions</h3>
+        <p>Use the arrow keys to move the chicken up, down, left and right.</p>
+    </aside>
+    </div>
+    <script src="./apps.js"></script>
 </body>
-
-</html>
