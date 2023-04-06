@@ -1,10 +1,14 @@
 canvas {
     background-image: url('./img/road.jpg');
-    background-size: cover;
+    display: block;
+    width: 500px;
+    height: 500px;
+    grid-column-start: 0;
     background-position: center center;
     background-color: white;
-    width: 40%;
-    height: 120%;
+    background-size: cover;
+    /* width: 40%;
+    height: 120%; */
     margin: 0 auto;
 }
 
