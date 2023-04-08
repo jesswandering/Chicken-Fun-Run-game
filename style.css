@@ -1,8 +1,8 @@
 canvas {
-    background-image: url('./img/road.jpg');
+    background-image: url('./img/myroad.png');
     display: block;
-    width: 500px;
-    height: 500px;
+    width: 640px;
+    height: 640px;
     grid-column-start: 0;
     background-position: center center;
     background-color: white;
@@ -18,8 +18,12 @@ title {
 }
 
 body {
-    background-color: white;
+    background-color: WHITE;
+    /* background-image: url('./img/grassy.jpg');
+    background-position: center; */
     text-align: center;
-    color: black;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-color: white;
     font-family: 'Work Sans', sans-serif;
 }
