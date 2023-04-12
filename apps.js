@@ -1,4 +1,24 @@
 console.log('Chicken Fun Run')
+let jokes = [
+    "You Win!\n\nWhy did the chicken cross the road?\n\nTo get to the other side.",
+    "You Win!\n\nWhy does a chicken coop have 2 doors?\n\nCause if it had 4 doors it'd be called a Chicken Sedan.",
+    "You Win!\n\nWhat do you call a cow with no legs?\n\nGround beef.",
+    "You Win!\n\nWhat do you call a cow with two legs?\n\nLean beef.",
+    "You Win!\n\nWhat do you call a cow with 3 legs?\n\nTri Tip.",
+    "You Win!\n\nWhy do dads take an extra pair of socks when they go golfing?\n\n\nIn case they get a hole in one!",
+    "You Win!\n\nHow did the barber win the race?\n\nHe knew a short cut!",
+    "You Win!\n\nWhat does a baby computer call his father?\n\nData. ",
+    "You Win!\n\nAfter an unsuccessful harvest, why did the farmer decide to try a career in music?\n\nBecause he had a ton of sick beets.",
+    "You Win!\n\nI only seem to get sick on weekdays.\n\nI must have a weekend immune system.",
+    "You Win!\n\nWhat's the difference between a well-dressed man on a unicycle and a poorly-dressed man on a bicycle?\n\nAttire.",
+    "You Win!\n\nI hate my job—all I do is crush cans all day.\n\nIt’s soda pressing.",
+    "You Win!\n\nWhat's blue and not very heavy?\n\nLight blue.",
+    "You Win!\n\nWhich farm animal likes computing the best?\n\nThe Ram.",
+    "You Win!\n\nWhy did the programmer quit her job?\n\nBecause she didn't get arrays.",
+    "You Win!\n\nWhat did the Java Code say to the C code?\n\nYou’ve got no class.",
+    "You Win!\n\nWhy do programmers prefer dark mode?\n\nBecause light attracts bugs.",
+    "You Win!\n\nWhy do Java programmers have to wear glasses?\n\nBecause they don’t C#.",
+]
 
 // DOM Elements
 const game = document.getElementById('game');
@@ -113,67 +133,75 @@ function moveChicken(e) {
             console.log('chicken.x', chicken.x)
         } else {
             console.log('chicken.x', chicken.x)
+            // alert('You Win!');
+            const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+            const popup = document.createElement('div');
+            popup.innerText = randomJoke;
+            popup.classList.add('win-popup');
+            document.body.appendChild(popup);
         }
+    }
+}
 
-        // Element that says you've won & append the element to the DOM instead of the alert
-        function addNewChicken() {
-            chicken.alive = false;
+// Element that says you've won & append the element to the DOM instead of the alert
+function addNewChicken() {
+    chicken.alive = false;
+}
+
+//====================== GAME PROCESSES ======================= //
+function gameLoop() {
+    // clear the canvas
+    ctx.clearRect(0, 0, game.width, game.height);
+    if (typeof chicken.alive === 'boolean' && chicken.alive) {
+        // execute code when chicken is alive
+        chicken.render();
+        let hit = detectHit(chicken, allCars)
+        if (hit) {
+            // chicken.image = egg;
+            console.log('chicken was hit');
+            clearInterval(runGame);
+            alert('Game Over!')
+            window.location.reload();
         }
+    }
 
-        //====================== GAME PROCESSES ======================= //
-        function gameLoop() {
-            // clear the canvas
-            ctx.clearRect(0, 0, game.width, game.height);
-            if (typeof chicken.alive === 'boolean' && chicken.alive) {
-                // execute code when chicken is alive
-                chicken.render();
-                let hit = detectHit(chicken, allCars)
-                if (hit) {
-                    // chicken.image = egg;
-                    console.log('chicken was hit');
-                    clearInterval(runGame);
-                    alert('Game Over!')
-                    window.location.reload();
-                }
-            }
+    chicken.render();
+    for (let i = 0; i < allCars.length; i++) {
+        allCars[i].render();
+    }
+}
 
-            chicken.render();
-            for (let i = 0; i < allCars.length; i++) {
-                allCars[i].render();
-            }
+// Movement function for cars
+function driveCars() {
+    let speeds = [4, 8, -8, -6, 5, 6, -8, -7];
+    for (let i = 0; i < allCars.length; i++) {
+        let car = allCars[i];
+        car.y += speeds[i];
+        if (speeds[i] > 0 && car.y > game.height) {
+            car.y = -car.height;
+        } else if (speeds[i] < 0 && car.y < -car.height) {
+            car.y = game.height;
         }
+    }
+}
+setInterval(driveCars, 40);
 
-        // Movement function for cars
-        function driveCars() {
-            let speeds = [4, 8, -8, -6, 5, 6, -8, -7];
-            for (let i = 0; i < allCars.length; i++) {
-                let car = allCars[i];
-                car.y += speeds[i];
-                if (speeds[i] > 0 && car.y > game.height) {
-                    car.y = -car.height;
-                } else if (speeds[i] < 0 && car.y < -car.height) {
-                    car.y = game.height;
-                }
-            }
+
+// Detect collision
+// returns boolean if chicken was hit
+function detectHit(chicken, allCars) {
+    for (let i = 0; i < allCars.length; i++) {
+        let car = allCars[i];
+        if (chicken.x < car.x + car.width &&
+            chicken.x + chicken.width > car.x &&
+            chicken.y < car.y + car.height &&
+            chicken.y + chicken.height > car.y) {
+            // collision detected
+            // When chicken gets hit it turns into egg image
+            chicken.image = egg;
+            return true;
         }
-        setInterval(driveCars, 40);
-
-
-        // Detect collision
-        // returns boolean if chicken was hit
-        function detectHit(chicken, allCars) {
-            for (let i = 0; i < allCars.length; i++) {
-                let car = allCars[i];
-                if (chicken.x < car.x + car.width &&
-                    chicken.x + chicken.width > car.x &&
-                    chicken.y < car.y + car.height &&
-                    chicken.y + chicken.height > car.y) {
-                    // collision detected
-                    // When chicken gets hit it turns into egg image
-                    chicken.image = egg;
-                    return true;
-                }
-            }
-            // no collision detected
-            return false;
-        }
+    }
+    // no collision detected
+    return false;
+}
