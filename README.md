@@ -22,6 +22,40 @@ To play, use your keyboard arrows to move the chicken up and down, left and righ
 6. Click the "OK" button to restart the game and try again. 
 7. Play again for another dad joke. 
 
+### HOW TO WIN
+You win the game when the Chicken successfully crosses the road without getting hit by a car and turning into a fried egg. 
+
+![win](./img/youwin.png)
+
+### CHARACTER MOVE FUNCTION AND WIN DETECTION
+```javascript
+// Keyboard Logic to move the chicken
+function moveChicken(e) {
+    console.log('movement :', e.key);
+
+    if (e.key === 'ArrowUp') {
+        chicken.y - 30 >= 0 ? (chicken.y -= 30) : null;
+    } else if (e.key === 'ArrowDown') {
+        chicken.y + 5 <= game.height - chicken.height ? (chicken.y += 30) : null;
+    } else if (e.key === 'ArrowLeft') {
+        chicken.x - -20 >= 0 ? (chicken.x -= 61) : null;
+    } else if (e.key === 'ArrowRight') {
+        if (chicken.x + 20 <= 493 - chicken.width) {
+            chicken.x += 61;
+            console.log('chicken.x', chicken.x)
+        } else {
+            console.log('chicken.x', chicken.x)
+            // WIN DETECTION for pop up with random jokes
+            const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+            const popup = document.createElement('div');
+            popup.innerText = randomJoke;
+            popup.classList.add('win-popup');
+            document.body.appendChild(popup);
+        }
+    }
+}
+```
+
 # FUTURE ENHANCEMENTS
 * Adding levels to the game to increase difficulty getting the chicken across the road
 * Levels may include:
@@ -43,9 +77,9 @@ To play, use your keyboard arrows to move the chicken up and down, left and righ
 ![whiteboardsketch](./img/WhiteboardSketch.png)
 
 # CREDITS
-* Sprites were created on Piskelapp.com/p/create/sprite 
-* Ethan Paiva created the chicken image
-* Scott Bruce, a software engineer friend provided me with guidance getting through any blocks
+* Sprites were created on https://www.piskelapp.com/p/create/sprite  
+* Ethan Paiva created the chicken sprite
+* Scott Bruce, a software engineer friend provided me with suggestions and guidance getting through any blocks
 * Learn JavaScript by Building 7 Games: https://www.youtube.com/watch?v=ec8vSKJuZTk
 * https://www.w3schools.com/js/
 
