@@ -47,6 +47,37 @@ let car6;
 let car7;
 let car8;
 
+class Character {
+    constructor(x, y, image, width, height) {
+        this.x = x;
+        this.y = y;
+        this.image = image;
+        this.width = width;
+        this.height = height;
+        this.alive = true;
+
+        this.render = function () {
+            ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        }
+    }
+}
+
+class Drivers {
+    constructor(x, y, image, width, height) {
+        this.x = x;
+        this.y = y;
+        this.image = image;
+        this.width = width;
+        this.height = height;
+        this.alive = true;
+
+        this.render = function () {
+            ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        }
+    }
+}
+
+
 
 // ====================== PAINT INTIAL SCREEN ======================= //
 // Event Listeners
@@ -87,35 +118,6 @@ startButton.addEventListener('click', renderCars);
 game.setAttribute('height', getComputedStyle(game)['height']);
 game.setAttribute('width', getComputedStyle(game)['width']);
 
-class Character {
-    constructor(x, y, image, width, height) {
-        this.x = x;
-        this.y = y;
-        this.image = image;
-        this.width = width;
-        this.height = height;
-        this.alive = true;
-
-        this.render = function () {
-            ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        }
-    }
-}
-
-class Drivers {
-    constructor(x, y, image, width, height) {
-        this.x = x;
-        this.y = y;
-        this.image = image;
-        this.width = width;
-        this.height = height;
-        this.alive = true;
-
-        this.render = function () {
-            ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        }
-    }
-}
 
 // Keyboard Logic to move the chicken
 function moveChicken(e) {

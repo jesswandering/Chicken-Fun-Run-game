@@ -39,6 +39,9 @@ To play, use your keyboard arrows to move the chicken up and down, left and righ
 # LICENSE
 (CC0 1.0 Universal) You're free to use this game and code in any project, personal or commercial. There's no need to ask permission before using these. Giving attribution is not required, but is appreciated.
 
+# INITIAL SKETCH
+![whiteboardsketch](http://img/whiteboardsketch.png)
+
 # CREDITS
 * Sprites were created on Piskelapp.com/p/create/sprite 
 * Ethan Paiva created the chicken image

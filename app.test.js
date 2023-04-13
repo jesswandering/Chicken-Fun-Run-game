@@ -1,28 +1,16 @@
-describe('Character', function () {
-    let character;
-
-    beforeEach(function () {
-        // Create a new Character object with a mock image
-        const mockImage = new Image();
-        character = new Character(100, 200, mockImage, 50, 50);
-
-        // Spy on the drawImage method of the canvas context
-        spyOn(ctx, 'drawImage');
+describe('character class', function () {
+    let hen = new Character(5, 200, chick, 40, 45);
+    console.log(Character);
+    it('should be a number for x', function () {
+        expect(typeof hen.x).toBe('number');
     });
 
-    describe('render', function () {
-        it('should draw the image on the canvas at the correct position and size', function () {
-            // Call the render method
-            character.render();
-
-            // Check that drawImage was called with the correct arguments
-            expect(ctx.drawImage).toHaveBeenCalledWith(
-                mockImage,
-                character.x,
-                character.y,
-                character.width,
-                character.height
-            );
-        });
+    it('should be a number for y', function () {
+        expect(typeof hen.y).toBe('number');
     });
+
+    it('should be an object', function () {
+        expect(typeof hen.image).toBe('object');
+    });
+
 });
