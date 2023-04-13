@@ -1,5 +1,8 @@
 # Chicken-Fun-Run-game
 
+![frogger](http://img/Frogger Game.png)
+
+
 Why did the chicken cross the road? 
 
 To get to the other side!

@@ -1,47 +1,28 @@
-// Function to test
-function detectHit(chicken, allCars) {
-    for (let i = 0; i < allCars.length; i++) {
-        let car = allCars[i];
-        if (chicken.x < car.x + car.width &&
-            chicken.x + chicken.width > car.x &&
-            chicken.y < car.y + car.height &&
-            chicken.y + chicken.height > car.y) {
-            // collision detected
-            // When chicken gets hit it turns into egg image
-            chicken.image = egg;
-            return true;
-        }
-    }
-    // no collision detected
-    return false;
-}
+describe('Character', function () {
+    let character;
 
-// Test suites
-describe("detectHit", function () {
-    // Test suite for collision detection
-    describe("when there is a collision", function () {
-        it("should change the chicken's image to an egg", function () {
-            // Set up test data
-            let chicken = { x: 100, y: 100, width: 50, height: 50, image: chickenImage };
-            let allCars = [{ x: 150, y: 100, width: 50, height: 50 }, { x: 100, y: 150, width: 50, height: 50 }, { x: 200, y: 200, width: 50, height: 50 },];
+    beforeEach(function () {
+        // Create a new Character object with a mock image
+        const mockImage = new Image();
+        character = new Character(100, 200, mockImage, 50, 50);
 
-            // Call the function being tested
-            detectHit(chicken, allCars);
+        // Spy on the drawImage method of the canvas context
+        spyOn(ctx, 'drawImage');
+    });
 
-            // Check the result
-            expect(chicken.image).toEqual(egg);
-        });
+    describe('render', function () {
+        it('should draw the image on the canvas at the correct position and size', function () {
+            // Call the render method
+            character.render();
 
-        it("should return true", function () {
-            // Set up test data
-            let chicken = { x: 100, y: 100, width: 50, height: 50, image: chickenImage };
-            let allCars = [{ x: 150, y: 100, width: 50, height: 50 }, { x: 100, y: 150, width: 50, height: 50 }, { x: 200, y: 200, width: 50, height: 50 },];
-
-            // Call the function being tested
-            let result = detectHit(chicken, allCars);
-
-            // Check the result
-            expect(result).toBe(true);
+            // Check that drawImage was called with the correct arguments
+            expect(ctx.drawImage).toHaveBeenCalledWith(
+                mockImage,
+                character.x,
+                character.y,
+                character.width,
+                character.height
+            );
         });
     });
-}
+});

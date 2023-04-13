@@ -133,7 +133,7 @@ function moveChicken(e) {
             console.log('chicken.x', chicken.x)
         } else {
             console.log('chicken.x', chicken.x)
-            // alert('You Win!');
+            // WIN DETECTION for pop up with random jokes
             const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
             const popup = document.createElement('div');
             popup.innerText = randomJoke;
